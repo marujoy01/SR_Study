@@ -43,4 +43,6 @@
 #endif
 #endif
 
+extern HWND g_hWnd;
+
 using namespace std;

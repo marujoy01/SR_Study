@@ -73,14 +73,15 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 			pMainApp->LateUpdate_MainApp();
 			pMainApp->Render_MainApp();
 		}
-       }
+     }
 
-	unsigned long dwRefCnt = 0;
+	_ulong dwRefCnt = 0;
 
-	/*if (dwRefCnt = Engine::Safe_Release(pMainApp))
-		return FALSE;*/
-
-
+	if (dwRefCnt = Engine::Safe_Release(pMainApp))
+	{
+		MSG_BOX("MainApp Destroy Failed");
+		return FALSE;
+	}
 
     return (int) msg.wParam;
 }
@@ -140,6 +141,8 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
    {
       return FALSE;
    }
+
+   g_hWnd = hWnd;
 
    ShowWindow(hWnd, nCmdShow);
    UpdateWindow(hWnd);
