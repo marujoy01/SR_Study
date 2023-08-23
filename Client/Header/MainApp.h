@@ -2,6 +2,7 @@
 
 #include "Base.h"
 #include "Engine_Define.h"
+#include "Export_System.h"
 
 BEGIN(Engine)
 

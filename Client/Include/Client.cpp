@@ -52,7 +52,11 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	if (nullptr == pMainApp)
 		return FALSE;
 
+	FAILED_CHECK_RETURN(Engine::Ready_Timer(L"Timer_Immediate"), FALSE);
+	FAILED_CHECK_RETURN(Engine::Ready_Timer(L"Timer_FPS60"), FALSE);
 
+	FAILED_CHECK_RETURN(Engine::Ready_Frame(L"Frame60", 60.f), FALSE);
+	
     // 기본 메시지 루프입니다.
     while (true)
     {
@@ -69,9 +73,19 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 		}
 		else
 		{
-			pMainApp->Update_MainApp(0.f);
-			pMainApp->LateUpdate_MainApp();
-			pMainApp->Render_MainApp();
+			Engine::Set_TimeDelta(L"Timer_Immediate");
+
+			_float	fTimeDelta_Immediate = Engine::Get_TimeDelta(L"Timer_Immediate");
+
+			if (Engine::IsPermit_Call(L"Frame60", fTimeDelta_Immediate))
+			{
+				Engine::Set_TimeDelta(L"Timer_FPS60");
+				_float	fTimeDelta_60 = Engine::Get_TimeDelta(L"Timer_FPS60");
+
+				pMainApp->Update_MainApp(fTimeDelta_60);
+				pMainApp->LateUpdate_MainApp();
+				pMainApp->Render_MainApp();
+			}		
 		}
      }
 

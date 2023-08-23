@@ -28,8 +28,19 @@ HRESULT			Ready_Timer(const _tchar*	pTimerTag)
 	return CTimerMgr::GetInstance()->Ready_Timer(pTimerTag);
 }
 
+// FrameMgr
+_bool			IsPermit_Call(const _tchar* pFrameTag, const _float& fTimeDelta)
+{
+	return CFrameMgr::GetInstance()->IsPermit_Call(pFrameTag, fTimeDelta);
+}
+HRESULT			Ready_Frame(const _tchar* pFrameTag, const _float& fCallLimit)
+{
+	return CFrameMgr::GetInstance()->Ready_Frame(pFrameTag, fCallLimit);
+}
+
 void	Release_System()
 {
+	CFrameMgr::GetInstance()->DestroyInstance();
 	CTimerMgr::GetInstance()->DestroyInstance();
 	CGraphicDev::GetInstance()->DestroyInstance();
 }

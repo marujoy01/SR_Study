@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "..\Header\MainApp.h"
 
-#include "Export_System.h"
+
 
 CMainApp::CMainApp()
 	: m_pDeviceClass(nullptr), m_pGraphicDev(nullptr)
