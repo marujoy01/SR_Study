@@ -2,7 +2,7 @@
 
 #include "Scene.h"
 
-#include "TriCol.h"
+#include "BackGround.h"
 
 class CLogo : public Engine::CScene
 {
@@ -17,12 +17,10 @@ public:
 	virtual void		Render_Scene();
 
 private:
+	HRESULT				Ready_Prototype();
 	HRESULT				Ready_Layer_Environment(const _tchar* pLayerTag);
 	HRESULT				Ready_Layer_GameLogic(const _tchar* pLayerTag)	{ return S_OK; }
 	HRESULT				Ready_Layer_UI(const _tchar* pLayerTag)			{ return S_OK; }
-
-private:
-	Engine::CTriCol*		m_pTriCol;
 
 public:
 	static CLogo*		Create(LPDIRECT3DDEVICE9 pGraphicDev);

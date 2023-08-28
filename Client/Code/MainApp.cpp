@@ -17,6 +17,19 @@ HRESULT CMainApp::Ready_MainApp()
 	FAILED_CHECK_RETURN(SetUp_DefaultSetting(&m_pGraphicDev), E_FAIL);
 	FAILED_CHECK_RETURN(Ready_Scene(m_pGraphicDev, &m_pManagementClass), E_FAIL);
 
+	_matrix	matView, matProj;
+
+	D3DXMatrixLookAtLH(&matView, 
+		&_vec3(0.f, 1.f, -10.f),
+		&_vec3(0.f, 0.f, 1.f), 
+		&_vec3(0.f, 1.f, 0.f));
+
+	D3DXMatrixPerspectiveFovLH(&matProj, D3DXToRadian(60.f), (float)WINCX / WINCY, 0.1f, 1000.f);
+
+	m_pGraphicDev->SetTransform(D3DTS_VIEW, &matView);
+	m_pGraphicDev->SetTransform(D3DTS_PROJECTION, &matProj);
+
+
 	return S_OK;
 }
 

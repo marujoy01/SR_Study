@@ -17,11 +17,15 @@ public:
 
 protected:
 	LPDIRECT3DVERTEXBUFFER9		m_pVB;
+	LPDIRECT3DINDEXBUFFER9		m_pIB;
 
 	_ulong			m_dwVtxCnt;			// 정점의 개수
 	_ulong			m_dwVtxSize;		// 정점의 크기
 	_ulong			m_dwTriCnt;			// 삼각형의 개수
 	_ulong			m_dwFVF;			// 정점의 속성
+
+	_ulong			m_dwIdxSize;		
+	D3DFORMAT		m_IdxFmt;
 
 public:
 	virtual void Free();

@@ -30,8 +30,17 @@ void			Render_Scene(LPDIRECT3DDEVICE9 pGraphicDev)
 	CManagement::GetInstance()->Render_Scene(pGraphicDev);
 }
 
+HRESULT			Ready_Proto(const _tchar* pProtoTag, CComponent* pComponent)
+{
+	return CProtoMgr::GetInstance()->Ready_Proto(pProtoTag, pComponent);
+}
+CComponent*		Clone_Proto(const _tchar* pProtoTag)
+{
+	return CProtoMgr::GetInstance()->Clone_Proto(pProtoTag);
+}
 
 void			Release_Utility()
 {
+	CProtoMgr::GetInstance()->DestroyInstance();
 	CManagement::GetInstance()->DestroyInstance();
 }
