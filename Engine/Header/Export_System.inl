@@ -17,7 +17,7 @@ void		Render_End()
 
 _float			Get_TimeDelta(const _tchar* pTimerTag)
 {
-	CTimerMgr::GetInstance()->Get_TimeDelta(pTimerTag);
+	return CTimerMgr::GetInstance()->Get_TimeDelta(pTimerTag);
 }
 void				Set_TimeDelta(const _tchar* pTimerTag)
 {
