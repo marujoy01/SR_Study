@@ -13,7 +13,7 @@ protected:
 	virtual ~CGameObject();
 
 public:
-	CComponent*		Find_Component(const _tchar* pComponentTag, COMPONENTID eID);
+	CComponent*		Get_Component(COMPONENTID eID, const _tchar* pComponentTag);
 
 public:
 	virtual HRESULT	Ready_GameObject();
@@ -24,6 +24,9 @@ public:
 protected:
 	map<const _tchar*, CComponent*>		m_mapComponent[ID_END];
 	LPDIRECT3DDEVICE9					m_pGraphicDev;
+
+private:
+	CComponent*		Find_Component(const _tchar* pComponentTag, COMPONENTID eID);
 
 public:
 	virtual void			Free();

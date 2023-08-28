@@ -3,10 +3,12 @@
 #include "Base.h"
 #include "Engine_Define.h"
 #include "Export_System.h"
+#include "Export_Utility.h"
 
 BEGIN(Engine)
 
 class CGraphicDev;
+class CManagement;
 
 END
 
@@ -23,8 +25,14 @@ public:			// 일반적인 함수, 변수
 	void		Render_MainApp();
 
 protected:		// 상속관련 함수, 변수
+
+private:
+	HRESULT		Ready_Scene(LPDIRECT3DDEVICE9 pGraphicDev, Engine::CManagement** ppManagement);
+	HRESULT		SetUp_DefaultSetting(LPDIRECT3DDEVICE9* ppGraphicDev);
+
 private:		// 접근을 최소화하는 함수, 변수
 	Engine::CGraphicDev*		m_pDeviceClass;
+	Engine::CManagement*		m_pManagementClass;
 	LPDIRECT3DDEVICE9			m_pGraphicDev;
 
 // 생성 함수

@@ -26,6 +26,15 @@ CComponent * CGameObject::Find_Component(const _tchar * pComponentTag, COMPONENT
 	return iter->second;
 }
 
+CComponent* Engine::CGameObject::Get_Component(COMPONENTID eID, const _tchar* pComponentTag)
+{
+	CComponent*		pComponent = Find_Component(pComponentTag, eID);
+
+	NULL_CHECK_RETURN(pComponent, nullptr);
+
+	return pComponent;
+}
+
 HRESULT CGameObject::Ready_GameObject()
 {
 	return S_OK;
