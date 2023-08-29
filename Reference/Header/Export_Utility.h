@@ -2,7 +2,11 @@
 
 #include "TriCol.h"
 #include "RcCol.h"
+
+#include "Transform.h"
+
 #include "ProtoMgr.h"
+
 
 BEGIN(Engine)
 

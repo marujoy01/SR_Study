@@ -6,6 +6,7 @@
 BEGIN(Engine)
 
 class CRcCol;
+class CTransform;
 
 END
 
@@ -24,9 +25,11 @@ public:
 
 private:
 	HRESULT					Add_Component();
+	void					Key_Input(const _float& fTimeDelta);
 
 private:
 	CRcCol*				m_pBufferCom = nullptr;
+	CTransform*			m_pTransformCom = nullptr;
 
 public:
 	static CBackGround*		Create(LPDIRECT3DDEVICE9 pGraphicDev);
