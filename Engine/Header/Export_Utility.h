@@ -2,7 +2,13 @@
 
 #include "TriCol.h"
 #include "RcCol.h"
+#include "RcTex.h"
+
+#include "Texture.h"
+#include "Transform.h"
+
 #include "ProtoMgr.h"
+
 
 BEGIN(Engine)
 

@@ -25,6 +25,9 @@ HRESULT CTriCol::Ready_Buffer(void)
 	m_dwVtxCnt = 3;
 	m_dwVtxSize = sizeof(VTXCOL);
 
+	m_dwIdxSize = sizeof(INDEX32);
+	m_IdxFmt = D3DFMT_INDEX32;
+
 	FAILED_CHECK_RETURN(CVIBuffer::Ready_Buffer(), E_FAIL);
 
 	VTXCOL*		pVertex = nullptr;
@@ -47,6 +50,17 @@ HRESULT CTriCol::Ready_Buffer(void)
 	pVertex[2].dwColor = D3DXCOLOR(0.f, 1.f, 0.f, 1.f);
 
 	m_pVB->Unlock();
+
+	INDEX32*		pIndex = nullptr;
+
+	m_pIB->Lock(0, 0, (void**)&pIndex, 0);
+
+	// 오른쪽 위
+	pIndex[0]._0 = 0;
+	pIndex[0]._1 = 1;
+	pIndex[0]._2 = 2;
+
+	m_pIB->Unlock();
 
 
 	return S_OK;

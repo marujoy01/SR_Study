@@ -7,15 +7,16 @@ BEGIN(Engine)
 
 class CRcTex;
 class CTexture;
+class CTransform;
 
 END
 
-class CBackGround : public Engine::CGameObject
+class CPlayer : public Engine::CGameObject
 {
 private:
-	explicit CBackGround(LPDIRECT3DDEVICE9 pGraphicDev);
-	explicit CBackGround(const CBackGround& rhs);
-	virtual ~CBackGround();
+	explicit CPlayer(LPDIRECT3DDEVICE9 pGraphicDev);
+	explicit CPlayer(const CPlayer& rhs);
+	virtual ~CPlayer();
 	
 public:
 	virtual HRESULT Ready_GameObject() override;
@@ -25,13 +26,14 @@ public:
 
 private:
 	HRESULT					Add_Component();
+	void					Key_Input(const _float& fTimeDelta);
 
 private:
 	CRcTex*				m_pBufferCom = nullptr;
+	CTransform*			m_pTransformCom = nullptr;
 	CTexture*			m_pTextureCom = nullptr;
-
 public:
-	static CBackGround*		Create(LPDIRECT3DDEVICE9 pGraphicDev);
+	static CPlayer*		Create(LPDIRECT3DDEVICE9 pGraphicDev);
 private:
 	virtual void Free();
 
