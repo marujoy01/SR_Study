@@ -8,6 +8,7 @@
 #include "Transform.h"
 
 #include "ProtoMgr.h"
+#include "Renderer.h"
 
 
 BEGIN(Engine)
@@ -25,6 +26,11 @@ inline void			Render_Scene(LPDIRECT3DDEVICE9 pGraphicDev);
 // ProtoMgr
 inline HRESULT			Ready_Proto(const _tchar* pProtoTag, CComponent* pComponent);
 inline CComponent*		Clone_Proto(const _tchar* pProtoTag);
+
+// Renderer
+inline void		Add_RenderGroup(RENDERID eType, CGameObject* pGameObject);
+inline void		Render_GameObject(LPDIRECT3DDEVICE9& pGraphicDev);
+inline void		Clear_RenderGroup();
 
 inline void			Release_Utility();
 

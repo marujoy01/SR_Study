@@ -32,11 +32,16 @@ public:
 	HRESULT			Ready_Transform();
 	virtual _int	Update_Component(const _float& fTimeDelta);
 
+	void			Chase_Target(const _vec3* pTargetPos, const _float& fTimeDelta, const _float& fSpeed);
+
 public:
 	_vec3		m_vInfo[INFO_END];
 	_vec3		m_vScale;
 	_vec3		m_vAngle;
 	_matrix		m_matWorld;
+
+private:
+	const _matrix*		Compute_LootAtTarget(const _vec3* pTargetPos);
 
 public:
 	static CTransform*		Create(LPDIRECT3DDEVICE9 pGraphicDev);

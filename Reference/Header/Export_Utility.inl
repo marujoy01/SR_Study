@@ -39,8 +39,22 @@ CComponent*		Clone_Proto(const _tchar* pProtoTag)
 	return CProtoMgr::GetInstance()->Clone_Proto(pProtoTag);
 }
 
+void		Add_RenderGroup(RENDERID eType, CGameObject* pGameObject)
+{
+	CRenderer::GetInstance()->Add_RenderGroup(eType, pGameObject);
+}
+void		Render_GameObject(LPDIRECT3DDEVICE9& pGraphicDev)
+{
+	CRenderer::GetInstance()->Render_GameObject(pGraphicDev);
+}
+void		Clear_RenderGroup()
+{
+	CRenderer::GetInstance()->Clear_RenderGroup();
+}
+
 void			Release_Utility()
 {
+	CRenderer::GetInstance()->DestroyInstance();
 	CProtoMgr::GetInstance()->DestroyInstance();
 	CManagement::GetInstance()->DestroyInstance();
 }

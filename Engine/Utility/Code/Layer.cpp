@@ -55,11 +55,7 @@ void CLayer::LateUpdate_Layer()
 		iter.second->LateUpdate_GameObject();
 }
 
-void CLayer::Render_Layer()
-{
-	for (auto& iter : m_mapObject)
-		iter.second->Render_GameObject();
-}
+
 
 CLayer * CLayer::Create()
 {
