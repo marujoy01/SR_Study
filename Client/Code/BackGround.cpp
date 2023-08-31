@@ -63,9 +63,11 @@ HRESULT CBackGround::Ready_GameObject()
 
 Engine::_int CBackGround::Update_GameObject(const _float& fTimeDelta)
 {
+	
+	Engine::Add_RenderGroup(RENDER_UI, this);
+
 	__super::Update_GameObject(fTimeDelta);
-
-
+	
 	return 0;
 }
 
