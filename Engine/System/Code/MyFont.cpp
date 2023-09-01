@@ -43,7 +43,7 @@ HRESULT CMyFont::Ready_Font(const _tchar * pFontType,
 
 void CMyFont::Render_Font(const _tchar * pString, const _vec2 * pPos, D3DXCOLOR Color)
 {
-	RECT	rc{ pPos->x, pPos->y };
+	RECT	rc{ (_long)pPos->x, (_long)pPos->y };
 
 	m_pSprite->Begin(D3DXSPRITE_ALPHABLEND);
 
@@ -54,7 +54,16 @@ void CMyFont::Render_Font(const _tchar * pString, const _vec2 * pPos, D3DXCOLOR 
 
 CMyFont * CMyFont::Create(LPDIRECT3DDEVICE9 pGraphicDev, const _tchar * pFontType, const _uint & iWidth, const _uint & iHeight, const _uint & iWeight)
 {
-	return nullptr;
+	CMyFont *	pInstance = new CMyFont(pGraphicDev);
+
+	if (FAILED(pInstance->Ready_Font(pFontType, iWidth, iHeight, iWeight)))
+	{
+		Safe_Release(pInstance);
+		MSG_BOX("폰트 문제야");
+		return nullptr;
+	}
+
+	return pInstance;
 }
 
 void CMyFont::Free()

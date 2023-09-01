@@ -11,6 +11,8 @@
 #include "ProtoMgr.h"
 #include "Renderer.h"
 
+#include "Camera.h"
+
 
 BEGIN(Engine)
 

@@ -28,6 +28,8 @@ HRESULT CMainApp::Ready_MainApp()
 
 int CMainApp::Update_MainApp(const _float & fTimeDelta)
 {
+	Engine::Update_InputDev();
+
 	m_pManagementClass->Update_Scene(fTimeDelta);
 
 	return 0;
@@ -74,6 +76,13 @@ HRESULT CMainApp::SetUp_DefaultSetting(LPDIRECT3DDEVICE9 * ppGraphicDev)
 
 	(*ppGraphicDev)->SetRenderState(D3DRS_LIGHTING, FALSE);
 
+	// InputDev
+	FAILED_CHECK_RETURN(Engine::Ready_InputDev(g_hInst, g_hWnd), E_FAIL);
+
+	// Font
+	FAILED_CHECK_RETURN(Engine::Ready_Font((*ppGraphicDev), L"Font_Default", L"πŸ≈¡", 15, 20, FW_HEAVY), E_FAIL);
+	FAILED_CHECK_RETURN(Engine::Ready_Font((*ppGraphicDev), L"Font_Jinji", L"±√º≠", 30, 30, FW_THIN), E_FAIL);
+	
 	return S_OK;
 }
 

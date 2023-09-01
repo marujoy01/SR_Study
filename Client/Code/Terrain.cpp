@@ -66,7 +66,6 @@ HRESULT CTerrain::Ready_GameObject()
 
 Engine::_int CTerrain::Update_GameObject(const _float& fTimeDelta)
 {
-	Key_Input(fTimeDelta);
 
 	Engine::Add_RenderGroup(RENDER_ALPHA, this);
 
@@ -89,52 +88,5 @@ void CTerrain::Render_GameObject()
 
 	m_pGraphicDev->SetRenderState(D3DRS_CULLMODE, D3DCULL_CCW);
 }
-void CTerrain::Key_Input(const _float & fTimeDelta)
-{
-	_vec3	vDir;
 
-	m_pTransformCom->Get_Info(INFO_UP, &vDir);
-
-	if (GetAsyncKeyState(VK_UP) & 0x8000)
-	{
-		D3DXVec3Normalize(&vDir, &vDir);
-		m_pTransformCom->Move_Pos(&vDir, fTimeDelta, 8.f);
-	}
-
-	if (GetAsyncKeyState(VK_DOWN) & 0x8000)
-	{
-		D3DXVec3Normalize(&vDir, &vDir);
-		m_pTransformCom->Move_Pos(&vDir, fTimeDelta, -8.f);
-	}
-
-	if (GetAsyncKeyState('Q') & 0x8000)
-	{
-		m_pTransformCom->Rotation(ROT_X, D3DXToRadian(90.f * fTimeDelta));
-	}
-
-	if (GetAsyncKeyState('A') & 0x8000)
-	{
-		m_pTransformCom->Rotation(ROT_X, D3DXToRadian(-90.f * fTimeDelta));
-	}
-
-	if (GetAsyncKeyState('W') & 0x8000)
-	{
-		m_pTransformCom->Rotation(ROT_Y, D3DXToRadian(90.f * fTimeDelta));
-	}
-
-	if (GetAsyncKeyState('S') & 0x8000)
-	{
-		m_pTransformCom->Rotation(ROT_Y, D3DXToRadian(-90.f * fTimeDelta));
-	}
-
-	if (GetAsyncKeyState('E') & 0x8000)
-	{
-		m_pTransformCom->Rotation(ROT_Z, D3DXToRadian(90.f * fTimeDelta));
-	}
-
-	if (GetAsyncKeyState('D') & 0x8000)
-	{
-		m_pTransformCom->Rotation(ROT_Z, D3DXToRadian(-90.f * fTimeDelta));
-	}
-}
 

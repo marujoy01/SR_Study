@@ -129,34 +129,15 @@ void CPlayer::Key_Input(const _float & fTimeDelta)
 		m_pTransformCom->Move_Pos(&vDir, fTimeDelta, -8.f);
 	}
 
-	if (GetAsyncKeyState('Q') & 0x8000)
-	{
-		m_pTransformCom->Rotation(ROT_X, D3DXToRadian(90.f * fTimeDelta));
-	}
-
-	if (GetAsyncKeyState('A') & 0x8000)
-	{
-		m_pTransformCom->Rotation(ROT_X, D3DXToRadian(-90.f * fTimeDelta));
-	}
-
-	if (GetAsyncKeyState('W') & 0x8000)
+	
+	if (GetAsyncKeyState(VK_LEFT) & 0x8000)
 	{
 		m_pTransformCom->Rotation(ROT_Y, D3DXToRadian(90.f * fTimeDelta));
 	}
 
-	if (GetAsyncKeyState('S') & 0x8000)
+	if (GetAsyncKeyState(VK_RIGHT) & 0x8000)
 	{
 		m_pTransformCom->Rotation(ROT_Y, D3DXToRadian(-90.f * fTimeDelta));
-	}
-
-	if (GetAsyncKeyState('E') & 0x8000)
-	{
-		m_pTransformCom->Rotation(ROT_Z, D3DXToRadian(90.f * fTimeDelta));
-	}
-
-	if (GetAsyncKeyState('D') & 0x8000)
-	{
-		m_pTransformCom->Rotation(ROT_Z, D3DXToRadian(-90.f * fTimeDelta));
 	}
 
 }

@@ -17,7 +17,7 @@ HRESULT CStage::Ready_Scene()
 {
 	_matrix	matView, matProj;
 
-	D3DXMatrixLookAtLH(&matView,
+	/*D3DXMatrixLookAtLH(&matView,
 		&_vec3(0.f, 1.f, -10.f),
 		&_vec3(0.f, 0.f, 1.f),
 		&_vec3(0.f, 1.f, 0.f));
@@ -25,7 +25,7 @@ HRESULT CStage::Ready_Scene()
 	D3DXMatrixPerspectiveFovLH(&matProj, D3DXToRadian(60.f), (float)WINCX / WINCY, 0.1f, 1000.f);
 
 	m_pGraphicDev->SetTransform(D3DTS_VIEW, &matView);
-	m_pGraphicDev->SetTransform(D3DTS_PROJECTION, &matProj);
+	m_pGraphicDev->SetTransform(D3DTS_PROJECTION, &matProj);*/
 
 	FAILED_CHECK_RETURN(Ready_Prototype(), E_FAIL);
 
@@ -66,6 +66,15 @@ HRESULT CStage::Ready_Layer_Environment(const _tchar * pLayerTag)
 	NULL_CHECK_RETURN(pLayer, E_FAIL);
 
 	Engine::CGameObject*		pGameObject = nullptr;
+
+
+	// DynamicCamera
+	pGameObject = CDynamicCamera::Create(m_pGraphicDev, 
+											&_vec3(0.f, 10.f, -10.f),
+											&_vec3(0.f, 0.f, 1.f),
+											&_vec3(0.f, 1.f, 0.f));
+	NULL_CHECK_RETURN(pGameObject, E_FAIL);
+	FAILED_CHECK_RETURN(pLayer->Add_GameObject(L"DynamicCamera", pGameObject), E_FAIL);
 
 	// Terrain
 	pGameObject = CTerrain::Create(m_pGraphicDev);
