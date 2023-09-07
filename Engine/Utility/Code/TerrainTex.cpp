@@ -98,21 +98,22 @@ HRESULT CTerrainTex::Ready_Buffer(const _ulong& dwCntX,
 				_float(pPixel[dwIndex] & 0x000000ff) / 20.f, 
 				_float(i) * dwVtxItv };
 
+			pVertex[dwIndex].vNormal = { 0.f, 0.f, 0.f };
+
 			m_pPos[dwIndex] = pVertex[dwIndex].vPosition;
 
 			pVertex[dwIndex].vTexUV		= { _float(j) / (dwCntX - 1) * 20.f,
 											_float(i) / (dwCntZ - 1) * 20.f };
 		}
 	}	
-	
-	m_pVB->Unlock();
-
 
 	Safe_Delete_Array(pPixel);
 
 	INDEX32*		pIndex = nullptr;
 
 	_ulong		dwTriIdx(0);
+
+	_vec3		vDst, vSrc, vNormal;
 
 	m_pIB->Lock(0, 0, (void**)&pIndex, 0);
 
@@ -126,16 +127,38 @@ HRESULT CTerrainTex::Ready_Buffer(const _ulong& dwCntX,
 			pIndex[dwTriIdx]._0 = dwIndex + dwCntX;
 			pIndex[dwTriIdx]._1 = dwIndex + dwCntX + 1;
 			pIndex[dwTriIdx]._2 = dwIndex + 1;
+			
+			vDst = pVertex[pIndex[dwTriIdx]._1].vPosition - pVertex[pIndex[dwTriIdx]._0].vPosition;
+			vSrc = pVertex[pIndex[dwTriIdx]._2].vPosition - pVertex[pIndex[dwTriIdx]._1].vPosition;
+			D3DXVec3Cross(&vNormal, &vDst, &vSrc);
+
+			pVertex[pIndex[dwTriIdx]._0].vNormal += vNormal;
+			pVertex[pIndex[dwTriIdx]._1].vNormal += vNormal;
+			pVertex[pIndex[dwTriIdx]._2].vNormal += vNormal;
+			
 			dwTriIdx++;
 
 			// ¿ÞÂÊ ¾Æ·¡ »ï°¢Çü
 			pIndex[dwTriIdx]._0 = dwIndex + dwCntX;
 			pIndex[dwTriIdx]._1 = dwIndex + 1;
 			pIndex[dwTriIdx]._2 = dwIndex;
+
+			vDst = pVertex[pIndex[dwTriIdx]._1].vPosition - pVertex[pIndex[dwTriIdx]._0].vPosition;
+			vSrc = pVertex[pIndex[dwTriIdx]._2].vPosition - pVertex[pIndex[dwTriIdx]._1].vPosition;
+			D3DXVec3Cross(&vNormal, &vDst, &vSrc);
+
+			pVertex[pIndex[dwTriIdx]._0].vNormal += vNormal;
+			pVertex[pIndex[dwTriIdx]._1].vNormal += vNormal;
+			pVertex[pIndex[dwTriIdx]._2].vNormal += vNormal;
+			
 			dwTriIdx++;
 		}
 	}
-	
+
+	for (_ulong i = 0; i < m_dwVtxCnt; ++i)
+		D3DXVec3Normalize(&pVertex[i].vNormal, &pVertex[i].vNormal);
+		
+	m_pVB->Unlock();
 	m_pIB->Unlock();
 
 	return S_OK;
@@ -172,4 +195,8 @@ void CTerrainTex::Free(void)
 		Safe_Delete_Array(m_pPos);
 
 	CVIBuffer::Free();
+
+	D3DXIntersectTri()
 }
+
+

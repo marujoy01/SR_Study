@@ -26,6 +26,7 @@ public:
 
 private:
 	HRESULT					Add_Component();
+	HRESULT					SetUp_Material();
 
 private:
 	CTerrainTex*		m_pBufferCom = nullptr;

@@ -12,9 +12,11 @@
 
 #include "ProtoMgr.h"
 #include "Renderer.h"
+#include "LightMgr.h"
 
 #include "Camera.h"
 #include "Pipeline.h"
+
 
 BEGIN(Engine)
 
@@ -36,6 +38,11 @@ inline CComponent*		Clone_Proto(const _tchar* pProtoTag);
 inline void		Add_RenderGroup(RENDERID eType, CGameObject* pGameObject);
 inline void		Render_GameObject(LPDIRECT3DDEVICE9& pGraphicDev);
 inline void		Clear_RenderGroup();
+
+// LightMgr
+inline HRESULT			Ready_Light(LPDIRECT3DDEVICE9 pGraphicDev,
+									const D3DLIGHT9* pLightInfo,
+									const _uint& iIndex);
 
 inline void			Release_Utility();
 

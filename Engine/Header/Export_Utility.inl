@@ -52,8 +52,18 @@ void		Clear_RenderGroup()
 	CRenderer::GetInstance()->Clear_RenderGroup();
 }
 
+// LightMgr
+HRESULT			Ready_Light(LPDIRECT3DDEVICE9 pGraphicDev,
+	const D3DLIGHT9* pLightInfo,
+	const _uint& iIndex)
+{
+	return CLightMgr::GetInstance()->Ready_Light(pGraphicDev, pLightInfo, iIndex);
+}
+
+
 void			Release_Utility()
 {
+	CLightMgr::GetInstance()->DestroyInstance();
 	CRenderer::GetInstance()->DestroyInstance();
 	CProtoMgr::GetInstance()->DestroyInstance();
 	CManagement::GetInstance()->DestroyInstance();
